@@ -1,0 +1,40 @@
+#include <iostream>
+#include<vector
+using namespace std;
+
+int countAnagrams(string p,string s){
+    vector<int>pf(256,0);
+    vector<int>sf(256,0);
+    int np=p.size(),ns=s.size();
+    int ps=0,ss=0;
+    int val;
+    for(int i=0;i<np;i++)
+    {
+        pf[p[i]]++;
+        sf[s[i]]++;
+    }
+    int c=0;
+    if(pf==sf)
+    c++;
+    int i=0,j=np;
+    while(j<ns){
+        sf[s[j]]++;
+        sf[s[i]]--;
+        if(pf==sf)
+        c++;
+        i++;
+        j++;
+    }
+        
+    return c;
+}
+
+int main()
+{
+    string text = "forxxorfxdofr";
+    string word = "for";
+     
+    cout << countAnagrams(text, word);
+     
+    return 0;
+}
