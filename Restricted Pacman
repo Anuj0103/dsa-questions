@@ -1,0 +1,29 @@
+class Solution{
+    public:
+    int candies(int m, int n) 
+    { 
+    	int x = (m*n)-m-n;
+    	x++;
+    	int dp[x];
+    	memset(dp,0,sizeof(dp));
+    	dp[0]=1;
+    	for(int i=1;i<x;i++)
+    	{
+    	    int ans=0;
+    	    if(i-n>=0)
+    	    ans|=dp[i-n];
+    	    
+    	    if(i-m>=0)
+    	    ans|=dp[i-m];
+    	    
+    	    dp[i]=ans;
+    	}
+    	int c=0;
+    	for(int i=1;i<x;i++)
+    	{
+    	    if(dp[i]==0)
+    	    c++;
+    	}
+    	return c;
+    } 
+};
