@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void rangeSum(int arr[], int N, int L, int R)
+{
+	int sum = 0;
+
+	  for (int i = L - 1; i < R; i++) {
+        sum += arr[i % N];
+    }
+
+	cout << sum;
+}
+
+int main()
+{
+	int arr[] = { 5, 2, 6, 9 };
+	int L = 10, R = 13;
+	int N = sizeof(arr) / sizeof(arr[0]);
+	rangeSum(arr, N, L, R);
+
+	return 0;
+}
