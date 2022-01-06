@@ -1,0 +1,75 @@
+
+class Solution 
+{
+    public:
+    //Function to find minimum number of pages.
+    
+    bool isValidConfig(int A[],int N,int M,int ans){
+        
+        int curr_pages=0,students=1;
+        for(int i=0;i<N;i++)
+        {
+            if(curr_pages+A[i]>ans){
+                curr_pages=A[i];
+                students++;
+                if(students>M)
+                return false;
+            }
+            
+            else
+            curr_pages+=A[i];
+        }
+        return true;
+    }
+    
+    
+    int findPages(int A[], int N, int M) 
+    {
+        //apply binary search to find mid point for array
+        int total_pages=0;
+        int s=0,e=0;
+        for(int i=0;i<N;i++){
+            total_pages+=A[i];
+            s=max(s,A[i]);
+        }
+        
+        e=total_pages;
+        int finalAns=0;
+        
+        while(s<=e){
+           int mid=(s+e)/2;
+            if(isValidConfig(A,N,M,mid)){
+                //true
+                finalAns=mid;
+                e=mid-1;
+            }
+            
+            else{
+                s=mid+1;
+            }
+            
+        }
+        
+        return finalAns;
+    }
+};
+
+// { Driver Code Starts.
+
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int A[n];
+        for(int i=0;i<n;i++){
+            cin>>A[i];
+        }
+        int m;
+        cin>>m;
+        Solution ob;
+        cout << ob.findPages(A, n, m) << endl;
+    }
+    return 0;
+}
